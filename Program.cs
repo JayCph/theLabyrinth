@@ -11,24 +11,21 @@ namespace theGladiatorsLabyrinth
         {
             Console.WriteLine("Welcome to \n");
             DialogColour.Progress_Dialog(@"
-           _____  _              ____  _             _  _         _                    
-          |_   _|| |__    ___   / ___|| |  __ _   __| |(_)  __ _ | |_  ___   _ __  ___ 
-            | |  | '_ \  / _ \ | |  _ | | / _` | / _` || | / _` || __|/ _ \ | '__|/ __|
-            | |  | | | ||  __/ | |_| || || (_| || (_| || || (_| || |_| (_) || |   \__ \
-            |_|  |_| |_| \___|  \____||_| \__,_| \__,_||_| \__,_| \__|\___/ |_|   |___/
-                                                                             
-             _            _                   _         _    _     
-            | |     __ _ | |__   _   _  _ __ (_) _ __  | |_ | |__  
-            | |    / _` || '_ \ | | | || '__|| || '_ \ | __|| '_ \ 
-            | |___| (_| || |_) || |_| || |   | || | | || |_ | | | |
-            |_____|\__,_||_.__/  \__, ||_|   |_||_| |_| \__||_| |_|
-                                 |___/                             ");
+               _____  _             _            _                   _         _    _     
+              |_   _|| |__    ___  | |     __ _ | |__   _   _  _ __ (_) _ __  | |_ | |__  
+                | |  | '_ \  / _ \ | |    / _` || '_ \ | | | || '__|| || '_ \ | __|| '_ \ 
+                | |  | | | ||  __/ | |___| (_| || |_) || |_| || |   | || | | || |_ | | | |
+                |_|  |_| |_| \___| |_____|\__,_||_.__/  \__, ||_|   |_||_| |_| \__||_| |_|
+                                                        |___/                             
+               
+               ~~ ** A small interactive text based adventure game by Janus B. Reedtz ** ~~                                
+            ");
 
             Console.ReadKey();
 
-            Console.WriteLine("\n\n\nThe Gladiator's Labyrinth is a text based Adventure Game where your choices will make or break your character.\n\n");
+            Console.WriteLine("\n\n\nThe Gladiator's Labyrinth is a text based Adventure Game written in C# while studying an AP in Software Development.\n\n");
 
-            DialogColour.Progress_Dialog("Hit any key to embark on an amazing adventure");
+            DialogColour.Progress_Dialog("Hit any key to embark on the adventure");
             Console.ReadKey();
             Console.Clear();
 
@@ -39,23 +36,34 @@ namespace theGladiatorsLabyrinth
 
         static void NameCharacter()
         {
-            Console.WriteLine("To begin your quest, enter the name of your character: ");
-            PlayerName = Console.ReadLine();
 
-            Console.WriteLine($"\nYour chosen character name is: {PlayerName}");
-
-            Console.WriteLine("\nIf this is correct, hit 'Y', if you want to rename your character hit the 'N' key");
-            Console.ReadKey();
-
-            if (true)
+            bool confirmed = false;
+            string PlayerName;
+            do
             {
+                Console.WriteLine("To begin your quest, enter the name of your character: ");
+                PlayerName = Console.ReadLine();
+                Console.WriteLine($"\nYour chosen character name is: {PlayerName}");
 
-            }
+                ConsoleKey response;
+                do
+                {
+                    Console.WriteLine($"Are you sure {PlayerName} is the name you want to move forward with? [y/n]");
+                    response = Console.ReadKey(false).Key;
+                    if (response != ConsoleKey.Enter)
+                        Console.WriteLine();
 
+                } while (response != ConsoleKey.Y && response != ConsoleKey.N);
 
-            DialogColour.TheAlchemyst_Dialog($"\"{PlayerName}, it is my unfortunate duty to inform you, that you more than likely, \n" +
+                confirmed = response == ConsoleKey.Y;
+            } while (!confirmed);
+            Console.WriteLine($"You chose the name {PlayerName} for your character, let the games commence!");
+            Console.ReadKey();
+            Console.Clear();
+
+            DialogColour.TheAlchemyst_Dialog($"\n\"{PlayerName}, it is my unfortunate duty to inform you, that you more than likely, \n" +
                 $"won't be making it out of the Labyrinth alive, so best of luck, surely you will need it!\" ");
-            Console.Write("Regards, The Alchymist");
+            Console.Write("- The Alchymist");
         }
 
         static void Choice()
